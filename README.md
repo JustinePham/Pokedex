@@ -3,7 +3,7 @@
 
 ![image](https://github.com/JustinePham/Pokedex/assets/8952158/08bc6bf0-f44a-4b41-8cf9-9c87d9808b18)
 
-A simple search app that fetches data about a pokemon when user enters either the pokemon name or the id number in the search bar.
+A simple search app that fetches data about a pokemon when user enters either the pokemon name or the id number in the search bar. Includes a simple description, the evolution chain if applicable, sprites, artwork, stats, abilites, and trainable moves.
 
 To run the application, run:
  - npm install
