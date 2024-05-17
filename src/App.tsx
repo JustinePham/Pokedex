@@ -78,7 +78,7 @@ export function PokemonMoves(props) {
     <div className="moves-container">
       <h3>Moves</h3>
       {props?.moves?.map((move) => {
-        return <div className="move-item">{move.move.name}</div>;
+        return <div key={move.move.name} className="move-item">{move.move.name}</div>;
       })}
     </div>
   );
