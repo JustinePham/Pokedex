@@ -54,7 +54,7 @@ function App() {
 export function Header(props: { name: string, id: number, types: any[]}) {
   return (
     <div className="info-row">
-      <h2 className=" pokemon-name">{props.name.toUpperCase()}</h2>
+      <h2 className=" pokemon-name">{props.name ? props.name.toUpperCase() : '---'}</h2>
       <h2 className=" pokemon-id">ID: #{props.id}</h2>
       <ElementTypes types={props.types} />
     </div>
