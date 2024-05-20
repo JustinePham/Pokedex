@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { PokemonSearch } from './pokemonSearchField';
 import { PokemonContext, useApi } from './PokemonContext';
-import { Abilities } from './PokemonAbilities';
+import Abilities from './PokemonAbilities';
 import { Stats } from './PokemonStats';
 import { Description } from './PokemonDescription';
 import './componentStyles.scss';
 import { PokemonSprites } from './PokemonSprites';
-import { EvolutionChain } from './PokemonEvolutionChain';
+import EvolutionChain from './PokemonEvolutionChain';
+import { Pokemon } from 'pokenode-ts';
 
 function App() {
   const [pokemon, setPokemon] = useState({});
@@ -27,10 +28,7 @@ function App() {
   }, []);
 
   // capture pokemon data from search
-  const searchCallback = (data) => {
-    setPokemon(data);
-    console.log(data);
-  };
+  const searchCallback = (data: Pokemon) => setPokemon(data);
 
   return (
     <PokemonContext.Provider value={pokemonAPI}>
@@ -39,10 +37,10 @@ function App() {
         <PokemonSearch emitData={searchCallback} />
         <OfficialArtwork url={pokemon.sprites?.other['official-artwork']} />
         <BasicInfoComponent>
-          <Header pokemon={pokemon} />
+          <Header name={pokemon.name} id={pokemon.id} types={pokemon.types} />
           <PokemonSprites sprites={pokemon.sprites} />
-          <EvolutionChain pokemon={pokemon} />
-          <Description pokemon={pokemon} />
+          <EvolutionChain species={pokemon.species} id={pokemon.id} />
+          <Description species={pokemon.species} id={pokemon.id} />
           <Stats id={pokemon.id} pstats={pokemon.stats} />
           <Abilities id={pokemon.id} abilities={pokemon.abilities} />
           <PokemonMoves moves={pokemon.moves} />
@@ -53,13 +51,12 @@ function App() {
 }
 
 // other components to add
-export function Header(props) {
-  const pokemon = props.pokemon;
+export function Header(props: { name: string, id: number, types: any[]}) {
   return (
     <div className="info-row">
-      <h2 className=" pokemon-name">{pokemon?.species?.name.toUpperCase()}</h2>
-      <h2 className=" pokemon-id">ID: #{pokemon.id}</h2>
-      <ElementTypes types={props.pokemon.types} />
+      <h2 className=" pokemon-name">{props.name.toUpperCase()}</h2>
+      <h2 className=" pokemon-id">ID: #{props.id}</h2>
+      <ElementTypes types={props.types} />
     </div>
   );
 }
@@ -72,7 +69,7 @@ export function Information() {
     </>
   );
 }
-export function PokemonMoves(props) {
+export function PokemonMoves(props: {moves: any[]}) {
   //console.log(props.moves);
   return (
     <div className="moves-container">
@@ -88,7 +85,7 @@ export function BasicInfoComponent({ children }) {
   return <div className="basic-info">{children}</div>;
 }
 
-export function ElementTypes(props) {
+export function ElementTypes(props: {types: any[]}) {
   return (
     <div className="element-row right">
       {props.types?.map((type) => {
@@ -102,7 +99,7 @@ export function ElementTypes(props) {
   );
 }
 
-export function OfficialArtwork(props) {
+export function OfficialArtwork(props: any) {
   if (!props.url) {
     return <div></div>;
   }

@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useApi } from './PokemonContext';
 import { PokemonSprite } from './PokemonSprites';
 
-export function EvolutionChain(props) {
+const EvolutionChain = (props: {id: number, species: any})  => {
   const [chain, setChain] = useState([]);
   const api = useApi();
 
-  const getEvolutionChain = (obj) => {
-    let evolutionChain = [];
+  const getEvolutionChain = (obj: any) => {
+    let evolutionChain: string [] = [];
     let current = obj.chain;
     do {
-      const speciesName = current.species.name;
-      evolutionChain.push(speciesName);
+      const speciesName: string = current.species.name;
+      evolutionChain.push(speciesName); // string
       current = current.evolves_to[0];
     } while (current && current.hasOwnProperty('species'));
     setChain(evolutionChain);
@@ -20,10 +20,10 @@ export function EvolutionChain(props) {
 
   useEffect(() => {
     const fetchPokemonSpecies = async () => {
-      if (props.pokemon.species) {
+      if (props.species) {
         try {
           const fetchedSpecies = await api.getPokemonSpeciesById(
-            props.pokemon.id
+            props.id
           );
           return fetchedSpecies;
         } catch (error) {
@@ -33,24 +33,25 @@ export function EvolutionChain(props) {
       }
     };
 
-    fetchPokemonSpecies().then((species) => {
+    fetchPokemonSpecies().then((species:any) => {
       if (species) {
         fetch(species.evolution_chain.url)
           .then((result) => result.json())
           .then((evolution) => {
-            setChain(getEvolutionChain(evolution));
+            return setChain(getEvolutionChain(evolution));
           });
       }
     });
-  }, [props.pokemon]);
+  }, [props.id, props.species]);
 
   return (
     <div className="info-column-100 evolution-container">
       <h3>Evolution Chain</h3>
 
       {chain?.map((evolution) => (
-        <PokemonSprite name={evolution} key={evolution + props.pokemon.id} />
+        <PokemonSprite name={evolution} key={evolution + props.id} />
       )) || <div>no data</div>}
     </div>
   );
 }
+export default memo(EvolutionChain);

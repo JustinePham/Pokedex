@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useApi } from './PokemonContext';
 
-export function Abilities(props) {
+ const Abilities = (props: {id: number, abilities: any[]}) => {
+  //console.log(props)
   const api = useApi();
   const [abilities, setAbilities] = useState([]);
 
@@ -36,7 +37,7 @@ export function Abilities(props) {
     fetchAndSetAbilities();
   }, [props.abilities]);
 
-  const processAbility = (effectEntries) => {
+  const processAbility = (effectEntries: any[]) => {
     let b = effectEntries.filter((entry) => entry.language.name === 'en');
     return b[0];
   };
@@ -56,4 +57,4 @@ export function Abilities(props) {
     </div>
   );
 }
-export default Abilities;
+export default memo(Abilities);

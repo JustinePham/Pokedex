@@ -1,6 +1,6 @@
 import './componentStyles.scss';
 
-export function Stats(props) {
+export function Stats(props: {id: number, pstats: any[]}) {
   return (
     <div className="stats-grid">
       {props.pstats?.map((stat) => {

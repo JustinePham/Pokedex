@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useApi } from './PokemonContext';
 import './componentStyles.scss';
 
-export function PokemonSprite(props) {
+export function PokemonSprite(props: { name: string }) {
   const [sprites, setSprites] = useState([]);
   const api = useApi();
   useEffect(() => {
@@ -17,13 +17,13 @@ export function PokemonSprite(props) {
       }
     };
     fetchSprites();
-  }, [props]);
+  }, [props.name]);
   return (
     <img key={props.name} title={props.name} src={sprites.front_default} />
   );
 }
 
-export function PokemonSprites(props) {
+export function PokemonSprites(props: { sprites: any}) {
   const hasFemaleSprites =
     props.sprites?.front_female || props.sprites?.back_female;
 

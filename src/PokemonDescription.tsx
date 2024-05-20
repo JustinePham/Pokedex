@@ -3,15 +3,15 @@ import { useApi } from './PokemonContext';
 import { PokemonSpecies } from 'pokenode-ts';
 import './componentStyles.scss';
 
-export function Description(props) {
+export function Description(props: { species: any, id: number}) {
   const [species, setSpecies] = useState({} as PokemonSpecies);
   const api = useApi();
   useEffect(() => {
     const fetchPokemonSpecies = async () => {
-      if (props.pokemon.species) {
+      if (props.species) {
         try {
           const fetchedSpecies = await api.getPokemonSpeciesById(
-            props.pokemon.id
+            props.id
           );
           setSpecies(fetchedSpecies);
           return fetchPokemonSpecies;
@@ -22,7 +22,7 @@ export function Description(props) {
       }
     };
     fetchPokemonSpecies();
-  }, [props.pokemon]);
+  }, [props.species, props.id]);
 
   const getDescription = (obj: PokemonSpecies) => {
     if (!obj.flavor_text_entries) return null;

@@ -1,8 +1,8 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { useApi } from './PokemonContext';
 
-export function PokemonSearch(props) {
+export function PokemonSearch(props: {emitData: (data: any) => void}) {
   const [value, setValue] = useState('');
   const api = useApi();
   const handleInput = () =>
@@ -14,7 +14,7 @@ export function PokemonSearch(props) {
           !isNaN(input) && isFinite(input)
             ? await api.getPokemonById(input)
             : await api.getPokemonByName(value.toLowerCase());
-
+      //  console.log (pokemonData)
         props.emitData(pokemonData);
       } catch (error) {
         console.error(error);
