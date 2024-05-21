@@ -10,6 +10,7 @@ body {
   font-family: 'Mina', sans-serif;
   font-weight: 400;
   font-style: normal;
+  color: #000
 }
 #root {
   max-width: 1280px;
