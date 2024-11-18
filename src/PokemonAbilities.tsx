@@ -1,21 +1,22 @@
 import { memo, useEffect, useState } from 'react';
 import { useApi } from './PokemonContext';
+import { PokemonAbility, Ability } from 'pokenode-ts';
 
- const Abilities = (props: {id: number, abilities: any[]}) => {
+ const Abilities = (props: {id: number, abilities: PokemonAbility[]}) => {
   //console.log(props)
   const api = useApi();
-  const [abilities, setAbilities] = useState([]);
+  const [abilities, setAbilities] = useState([] as Ability[]);
 
   const fetchAbilities = async () => {
     try {
-      let results;
+       
       const promises = props.abilities.map((item) =>
         api.getAbilityByName(item.ability.name)
       );
-      results = await Promise.all(promises);
+      let results = await Promise.all(promises);
 
       // removes duplicates
-      return results.reduce((accumulator, current) => {
+      return results.reduce((accumulator: Ability[], current) => {
         if (!accumulator.includes(current)) {
           accumulator.push(current);
         }

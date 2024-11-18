@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import './App.css';
 import { PokemonSearch } from './pokemonSearchField';
 import { PokemonContext, useApi } from './PokemonContext';
@@ -10,8 +10,12 @@ import { PokemonSprites } from './PokemonSprites';
 import EvolutionChain from './PokemonEvolutionChain';
 import { Pokemon } from 'pokenode-ts';
 
+
+interface BasicInfoComponentProps {
+  children: ReactNode; // Type for anything React can render
+}
 function App() {
-  const [pokemon, setPokemon] = useState({});
+  const [pokemon, setPokemon] = useState({} as Pokemon);
   const pokemonAPI = useApi();
 
   const idRandomizer = () => Math.floor(Math.random() * 1026);
@@ -21,7 +25,7 @@ function App() {
     // only run this once when starting up
     if (initial.current) {
       pokemonAPI.getPokemonById(initial.current).then((result) => {
-        setPokemon(result);
+        setPokemon(result as Pokemon);
         console.log(result);
       });
     }
@@ -35,7 +39,7 @@ function App() {
       <h1>Pokédex</h1>
       <div className="card">
         <PokemonSearch emitData={searchCallback} />
-        <OfficialArtwork url={pokemon.sprites?.other['official-artwork']} />
+        <OfficialArtwork url={pokemon.sprites} />
         <BasicInfoComponent>
           <Header name={pokemon.name} id={pokemon.id} types={pokemon.types} />
           <PokemonSprites sprites={pokemon.sprites} />
@@ -81,7 +85,7 @@ export function PokemonMoves(props: {moves: any[]}) {
   );
 }
 
-export function BasicInfoComponent({ children }) {
+export function BasicInfoComponent({ children }: BasicInfoComponentProps) {
   return <div className="basic-info">{children}</div>;
 }
 

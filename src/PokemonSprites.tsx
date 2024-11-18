@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useApi } from './PokemonContext';
 import './componentStyles.scss';
+import { type PokemonSprites } from 'pokenode-ts';
 
+ 
 export function PokemonSprite(props: { name: string }) {
-  const [sprites, setSprites] = useState([]);
+  const [sprites, setSprites] = useState([] as unknown as PokemonSprites);
   const api = useApi();
   useEffect(() => {
     const fetchSprites = async () => {
@@ -19,7 +21,7 @@ export function PokemonSprite(props: { name: string }) {
     fetchSprites();
   }, [props.name]);
   return (
-    <img key={props.name} title={props.name} src={sprites.front_default} />
+    <img key={props.name} title={props.name} src={sprites.front_default || ''} />
   );
 }
 

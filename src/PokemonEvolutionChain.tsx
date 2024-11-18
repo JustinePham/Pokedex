@@ -3,7 +3,7 @@ import { useApi } from './PokemonContext';
 import { PokemonSprite } from './PokemonSprites';
 
 const EvolutionChain = (props: {id: number, species: any})  => {
-  const [chain, setChain] = useState([]);
+  const [chain, setChain] = useState([] as string[]);
   const api = useApi();
 
   const getEvolutionChain = (obj: any) => {
@@ -38,6 +38,7 @@ const EvolutionChain = (props: {id: number, species: any})  => {
         fetch(species.evolution_chain.url)
           .then((result) => result.json())
           .then((evolution) => {
+            console.log(evolution)
             return setChain(getEvolutionChain(evolution));
           });
       }
