@@ -1,0 +1,91 @@
+body {
+  background: linear-gradient(
+    180deg,
+    rgba(134, 222, 199, 1) 0%,
+    rgba(252, 255, 180, 1) 100%
+  );
+  background-repeat: none;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Mina', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #000
+}
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+input[type='text'] {
+  border-radius: 20px 0 0 20px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: white;
+  color: grey;
+  border: none;
+}
+input[type='text']:focus-visible {
+  background-color: mintcream;
+  outline: none;
+  transition: background-color 0.5s ease;
+}
+.search-btn {
+  border-radius: 0 20px 20px 0;
+  background-color: paleturquoise;
+  border: none;
+}
+.search-btn:hover {
+  background-color: aquamarine;
+  outline-color: none;
+  border: none;
+  transition: background-color 0.5s ease;
+}
+.search-btn:focus {
+  outline: none;
+  border: none;
+  background-color: aquamarine;
+  transition: background-color 0.5s ease;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
