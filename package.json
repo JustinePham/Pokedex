@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://justinepham.github.io/Pokedex/",
+  "homepage": "https://justinepham.github.io/Pokedex",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
