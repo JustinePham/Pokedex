@@ -10,12 +10,14 @@ body {
   font-family: 'Mina', sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: #000
+  color: #000;
+  min-width: fit-content;
+  min-height: 100vh;
+  width: 100%;
 }
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 15px;

@@ -104,12 +104,21 @@ export function ElementTypes(props: {types: any[]}) {
 }
 
 export function OfficialArtwork(props: any) {
-  if (!props.url) {
+  if (!props?.url) {
     return <div></div>;
   }
+
+  let url = props?.url?.other['official-artwork'].front_default;
   return (
-    <div>
-      <img src={props.url.front_default} />
+    <div style={{ 
+      backgroundImage: `url(${url})`,
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      width: '100%',
+      height: '300px',
+      backgroundSize: 'contain'
+      }}>
+      {/* <img src={url}/> */}
     </div>
   );
 }
